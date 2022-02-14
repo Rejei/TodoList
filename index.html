@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo App JavaScript</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    </head>
+    <body>
+      <div class="wrapper">
+        <header>Todo App</header>
+        <div class="inputField">
+          <input type="text" placeholder="Добавьте новое задание">
+          <button><i class="fas fa-plus"></i></button>
+        </div>
+        <h3>Не выполненные:</h3>
+        <ul class="notCompletedList">
+          <!-- data are comes from local storage -->
+        </ul>
+        <h3>Выполненные:</h3>
+        <ul class="completedList">
+          <!-- data are comes from local storage -->
+        </ul>
+        <div class="footer">
+          <span>У Вас <span class="notCompletedTasksCounter"></span> незавершенных задачи</span>
+          <span>У Вас <span class="completedTasksCounter"></span> завершенных задачи</span>
+          <span>У Вас <span class="tasksCounter"></span> всего задач</span>
+          <button>Очистить</button>
+        </div>
+      </div>
+      <script src="script.js"></script>
+</html>
