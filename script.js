@@ -14,11 +14,9 @@ function Todo(description){
 
 inputBox.onkeyup = () => {
     let userEnteredValue = inputBox.value;
-    if(userEnteredValue.trim() != 0){
-        addBtn.classList.add("active"); //активируем кнопку "плюс"
-    } else {
+    !!userEnteredValue.trim() ?
+        addBtn.classList.add("active") : //активируем кнопку "плюс"
         addBtn.classList.remove("active"); //деактивируем кнопку "плюс"
-    }
 }
 
 function showTasks(){
@@ -27,43 +25,35 @@ function showTasks(){
     const notCompletedTasksCounter = document.querySelector(".notCompletedTasksCounter");
     const completedTasksCounter = document.querySelector(".completedTasksCounter");
     const tasksCounter = document.querySelector(".tasksCounter");
-    if(todoList.length > 0){
-        deleteAllBtn.classList.add("active"); //активируем кнопку "удалить все"
-    } else {
-        deleteAllBtn.classList.remove("active"); //деактивируем кнопку "удалить все"
-    }
     let notCompleteLiTag = '-';
     let completeLiTag = '-';
     let finished = 0;
     tasksCounter.innerHTML = 0;
     notCompletedTasksCounter.innerHTML = 0;
     completedTasksCounter.innerHTML = 0;
+
+    todoList.length > 0 ?
+        deleteAllBtn.classList.add("active") ://активируем кнопку "удалить все"
+        deleteAllBtn.classList.remove("active"); //деактивируем кнопку "удалить все"
+
     todoList.forEach((element, index) => {
         if(!element.isCompleted){
             let newLi =`<li>${element.description}
-            <div class="buttons">
-                <span class="icon completed" onclick="completeTask(${index})"><i class="fas fa-check"></i></span>
+                    <div class="buttons">
+                    <span class="icon completed" onclick="completeTask(${index})"><i class="fas fa-check"></i></span>
+                    <span class="icon deleted" onclick="deleteTask(${index})"><i class="fas fa-trash"></i>
+                    </div>
+            </span></li>`
+            notCompleteLiTag === '-' ? notCompleteLiTag = newLi : notCompleteLiTag += newLi
+        } else {
+            finished++;
+            let newLi = `<li>${element.description}
+                <div class="buttons">
                 <span class="icon deleted" onclick="deleteTask(${index})"><i class="fas fa-trash"></i>
-            </div>
-        </span></li>`
-            if(notCompleteLiTag === '-'){
-                notCompleteLiTag = newLi
-        } else {
-        notCompleteLiTag += newLi
-        }
-    } else {
-        finished++;
-        let newLi = `<li>${element.description}
-        <div class="buttons">
-        <span class="icon deleted" onclick="deleteTask(${index})"><i class="fas fa-trash"></i>
-        </div>
-        </span></li>`
-        if(completeLiTag === '-'){
-            completeLiTag = newLi
-        } else {
-            completeLiTag += newLi
-        }
-    };
+                </div>
+            </span></li>`
+            completeLiTag === '-' ? completeLiTag = newLi : completeLiTag += newLi
+        };
     });
     notCompletedList.innerHTML = notCompleteLiTag; //добавляем созданный li в список
     completedList.innerHTML = completeLiTag; //добавляем созданный li в список
